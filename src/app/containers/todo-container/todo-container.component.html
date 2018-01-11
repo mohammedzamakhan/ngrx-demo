@@ -1,0 +1,10 @@
+<div class="input-group mb-3">
+  <input #addInput type="text" (keydown.enter)="addTodo(addInput)" type="text" class="form-control" placeholder="Add a todo..." aria-label="Add a todo..." aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-primary" type="button" (click)="addTodo(addInput)"><i class="far fa-plus-square"></i></button>
+  </div>
+</div>
+
+<app-todos [todos]="todos" (delete)="handleDelete($event)" (onToggle)="handleToggle($event)"></app-todos>
+
+Total Number of Todos: {{todos.length}}

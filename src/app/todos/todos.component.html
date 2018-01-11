@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let todo of todos; let i = index">
+    <div class="custom-control custom-checkbox">
+  <input [ngModel]="todo.completed" (change)="toggleCompleted($event, todo)" type="checkbox" class="custom-control-input" id="{{i}}">
+  <label class="custom-control-label" [attr.for]="i">{{ todo.title }} ({{ todo.completed }})</label>
+</div>
+    
+    <button class="btn btn-danger" (click)="deleteTodo(todo)"><i class="far fa-trash-alt"></i></button>
+  </li>
+</ul>

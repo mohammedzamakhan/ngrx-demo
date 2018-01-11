@@ -1,0 +1,17 @@
+p {
+  font-family: Lato;
+}
+
+h2 {
+  margin-bottom: 5rem;
+  text-decoration: underline;
+}
+
+.image-container {
+  margin: 20px auto;
+  width: 100px;
+}
+
+img {
+  width: 100px
+}

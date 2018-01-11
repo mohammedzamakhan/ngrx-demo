@@ -1,21 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { TodoService } from './../../todo.service';
+import { Store } from '@ngrx/store';
+import { AddTodo, DeleteTodo, EditTodo, LoadTodos } from '../../actions/todo.actions';
 
 @Component({
   selector: 'app-todo-container',
   templateUrl: './todo-container.component.html',
   styleUrls: ['./todo-container.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoContainerComponent implements OnInit {
   todos;
-  constructor(private _todoService: TodoService) {
-    this.getTodos();
-  }
 
-  getTodos() {
-    this._todoService.getTodos().subscribe(todos => {
-      this.todos = todos;
+  constructor(private store: Store<any>) {
+    this.store.select('todos').subscribe(todoStore => {
+      this.todos = todoStore.data;
     });
   }
 
@@ -25,16 +23,22 @@ export class TodoContainerComponent implements OnInit {
   addTodo(input) {
     const { value } = input;
     if (value) {
-      this._todoService.addTodo(value);
+      this.store.dispatch(new AddTodo(value));
       input.value = '';
     }
   }
 
   handleDelete($event) {
-    this._todoService.deleteTodo($event);
+    this.store.dispatch(new DeleteTodo($event));
   }
 
   handleToggle({completed, todo}) {
-    this._todoService.toggleCompleted(completed, todo);
+    this.store.dispatch(new EditTodo({
+      todo,
+      changes: {
+        completed
+      }
+    }));
+
   }
 }

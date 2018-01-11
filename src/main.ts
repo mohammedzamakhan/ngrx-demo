@@ -6,7 +6,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 
 platformBrowserDynamic().bootstrapModule(AppModule, {
-  // ngZone: 'noop'
+  ngZone: 'noop'
 }).then(ref => {
   // Ensure Angular destroys itself on hot reloads.
   if (window['ngRef']) {
